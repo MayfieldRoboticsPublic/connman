@@ -3,11 +3,11 @@ FROM mayfieldrobotics/ubuntu:14.04
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm"
 
-ARG CONNMAN_VER="1.33"
-ARG PKG_RELEASE="0"
-ARG INSTALL_DIR="/tmp/installdir"
-ARG ARTIFACTS_DIR="/root/artifacts"
+ARG CONNMAN_VER
+ARG PKG_RELEASE
+ARG ARTIFACTS_DIR
 
+ENV INSTALL_DIR="/tmp/installdir"
 ENV PKG_VERSION="${CONNMAN_VER}-${PKG_RELEASE}mayfield"
 
 RUN apt-get update -qq \
@@ -65,11 +65,6 @@ RUN fpm \
   --maintainer "Spyros Maniatopoulos <spyros@mayfieldrobotics.com>" \
   --url "https://github.com/mayfieldrobotics/connman" \
   .
-  # usr/bin usr/sbin usr/include etc
-
-RUN ls | grep .deb
 
 RUN mkdir -p ${ARTIFACTS_DIR} \
-  && mv *.deb ${ARTIFACTS_DIR} \
-  && dpkg-deb --info ${ARTIFACTS_DIR}/connman_* \
-  && dpkg-deb --contents ${ARTIFACTS_DIR}/connman_*
+  && mv *.deb ${ARTIFACTS_DIR}
