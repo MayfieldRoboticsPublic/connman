@@ -43,6 +43,8 @@ RUN make \
   && make install DESTDIR=${INSTALL_DIR} \
   && ls ${INSTALL_DIR}
 
+# TODO: Copy files that should be installed (DBus configuration, VPN conf)
+
 # NOTE: The dependencies below were copied from connman 1.15-0ubuntu3 (Trusty)
 #       Actual dependencies of 1.33: http://packages.ubuntu.com/xenial/connman
 RUN fpm \
