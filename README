@@ -4,6 +4,13 @@ Connection Manager
 Copyright (C) 2007-2012  Intel Corporation. All rights reserved.
 
 
+AutoReconnect Fork to 1.33
+==========================
+This fork contains 1.33-mf branch
+	- AutoReconnect when there are dropouts (connman ususually sets this to a failed state and does not try to reconnect)
+	- Requires two new paramters to main.conf: IgnoreInvalidKey=(true|false), AutoResetFailureTimeout=<seconds>
+
+
 Functionality and features
 ==========================
 

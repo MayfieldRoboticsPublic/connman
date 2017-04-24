@@ -806,6 +806,9 @@ static void handle_multi_line(struct web_session *session)
 		g_string_insert_c(session->current_header, 0, ' ');
 	}
 
+	if (!session->result.last_key)
+		return;
+
 	value = g_hash_table_lookup(session->result.headers,
 					session->result.last_key);
 	if (value) {

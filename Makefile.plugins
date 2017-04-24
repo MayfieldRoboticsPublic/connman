@@ -171,6 +171,11 @@ builtin_modules += pacrunner
 builtin_sources += plugins/pacrunner.c
 endif
 
+if ARFAILURE
+builtin_modules += arfailure
+builtin_sources += plugins/arfailure.c
+endif
+
 if POLKIT
 builtin_modules += polkit
 builtin_sources += plugins/polkit.c

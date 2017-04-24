@@ -134,5 +134,10 @@ ethernet tethering.
 AllowHostnameUpdates = false
 TetheringTechnologies = ethernet,wifi,bluetooth,gadget
 .fi
+.TP
+.B IgnoreInvalidKey=\fPtrue|false\fP
+When set to true, connman ignores previously stored invalid-key errors
+when connecting to a wifi service.
+Default value is false.
 .SH "SEE ALSO"
 .BR connman (8)

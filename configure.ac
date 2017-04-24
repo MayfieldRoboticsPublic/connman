@@ -279,6 +279,11 @@ AC_ARG_ENABLE(nmcompat, AC_HELP_STRING([--enable-nmcompat],
 			[enable_nmcompat=${enableval}], [enable_nmcompat="no"])
 AM_CONDITIONAL(NMCOMPAT, test "${enable_nmcompat}" != "no")
 
+AC_ARG_ENABLE(arfailure, AC_HELP_STRING([--enable-arfailure],
+				[enable auto reset failure plugin]),
+				[enable_arfailure=${enableval}], [enable_arfailure="no"])
+AM_CONDITIONAL(ARFAILURE, test "${enable_arfailure}" != "no")
+
 AC_ARG_ENABLE(polkit, AC_HELP_STRING([--enable-polkit],
 				[enable PolicyKit support]),
 			[enable_polkit=${enableval}], [enable_polkit="no"])

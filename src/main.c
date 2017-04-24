@@ -41,6 +41,7 @@
 
 #define DEFAULT_INPUT_REQUEST_TIMEOUT (120 * 1000)
 #define DEFAULT_BROWSER_LAUNCH_TIMEOUT (300 * 1000)
+#define DEFAULT_AUTO_RESET_FAILURE_TIMEOUT (-1)
 
 #define MAINFILE "main.conf"
 #define CONFIGMAINFILE CONFIGDIR "/" MAINFILE
@@ -76,6 +77,8 @@ static struct {
 	char **tethering_technologies;
 	bool persistent_tethering_mode;
 	bool enable_6to4;
+	bool ignore_invalid_key;
+	int auto_reset_failure_timeout;
 } connman_settings  = {
 	.bg_scan = true,
 	.pref_timeservers = NULL,
@@ -90,6 +93,8 @@ static struct {
 	.tethering_technologies = NULL,
 	.persistent_tethering_mode = false,
 	.enable_6to4 = false,
+	.ignore_invalid_key = false,
+	.auto_reset_failure_timeout = DEFAULT_AUTO_RESET_FAILURE_TIMEOUT,
 };
 
 #define CONF_BG_SCAN                    "BackgroundScanning"
@@ -105,6 +110,8 @@ static struct {
 #define CONF_TETHERING_TECHNOLOGIES      "TetheringTechnologies"
 #define CONF_PERSISTENT_TETHERING_MODE  "PersistentTetheringMode"
 #define CONF_ENABLE_6TO4                "Enable6to4"
+#define CONF_IGNORE_INVALID_KEY         "IgnoreInvalidKey"
+#define CONF_AUTO_RESET_FAILURE_TIMEOUT "AutoResetFailureTimeout"
 
 static const char *supported_options[] = {
 	CONF_BG_SCAN,
@@ -120,6 +127,8 @@ static const char *supported_options[] = {
 	CONF_TETHERING_TECHNOLOGIES,
 	CONF_PERSISTENT_TETHERING_MODE,
 	CONF_ENABLE_6TO4,
+	CONF_IGNORE_INVALID_KEY,
+	CONF_AUTO_RESET_FAILURE_TIMEOUT,
 	NULL
 };
 
@@ -367,6 +376,20 @@ static void parse_config(GKeyFile *config)
 		connman_settings.enable_6to4 = boolean;
 
 	g_clear_error(&error);
+
+	boolean = __connman_config_get_bool(config, "General",
+			CONF_IGNORE_INVALID_KEY, &error);
+	if (!error)
+		connman_settings.ignore_invalid_key = boolean;
+
+	g_clear_error(&error);
+
+	timeout = g_key_file_get_integer(config, "General",
+			CONF_AUTO_RESET_FAILURE_TIMEOUT, &error);
+	if (!error && timeout >= -1)
+		connman_settings.auto_reset_failure_timeout = timeout;
+
+	g_clear_error(&error);
 }
 
 static int config_init(const char *file)
@@ -544,6 +567,9 @@ bool connman_setting_get_bool(const char *key)
 	if (g_str_equal(key, CONF_ENABLE_6TO4))
 		return connman_settings.enable_6to4;
 
+	if (g_str_equal(key, CONF_IGNORE_INVALID_KEY))
+		return connman_settings.ignore_invalid_key;
+
 	return false;
 }
 
@@ -583,6 +609,11 @@ unsigned int connman_timeout_input_request(void)
 unsigned int connman_timeout_browser_launch(void)
 {
 	return connman_settings.timeout_browserlaunch;
+}
+
+int connman_auto_reset_failure_timeout(void)
+{
+	return connman_settings.auto_reset_failure_timeout;
 }
 
 int main(int argc, char *argv[])
