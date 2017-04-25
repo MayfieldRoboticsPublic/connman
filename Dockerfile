@@ -40,8 +40,7 @@ RUN ./bootstrap-configure \
 
 RUN make \
   && mkdir -p ${INSTALL_DIR} \
-  && make install DESTDIR=${INSTALL_DIR} \
-  && ls ${INSTALL_DIR}
+  && make install DESTDIR=${INSTALL_DIR}
 
 # TODO: Copy files that should be installed (DBus configuration, VPN conf)
 
