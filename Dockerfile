@@ -5,10 +5,11 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 ARG CONNMAN_VER
 ARG PKG_RELEASE
+ARG MAYFIELD_VER
 ARG ARTIFACTS_DIR
 
 ENV INSTALL_DIR="/tmp/installdir"
-ENV PKG_VERSION="${CONNMAN_VER}-${PKG_RELEASE}mayfield"
+ENV PKG_VERSION="${CONNMAN_VER}-${PKG_RELEASE}mayfield${MAYFIELD_VER}"
 
 RUN apt-get update -qq \
   && apt-get install -yq \

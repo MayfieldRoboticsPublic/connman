@@ -9,6 +9,7 @@ DOCKER_ARTIFACTS="/root/artifacts"
 docker build \
   --build-arg CONNMAN_VER="1.33" \
   --build-arg PKG_RELEASE="0" \
+  --build-arg MAYFIELD_VER="0" \
   --build-arg ARTIFACTS_DIR=${DOCKER_ARTIFACTS} \
   --tag ${DOCKER_IMAGE} \
   .
