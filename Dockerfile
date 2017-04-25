@@ -52,7 +52,6 @@ RUN fpm \
   --chdir ${INSTALL_DIR} \
   --output-type deb \
   --architecture native \
-  --package connman_${PKG_VERSION}_amd64.deb \
   --name connman \
   --version ${PKG_VERSION} \
   --description "Intel's Connection Manager daemon patched by Mayfield." \
