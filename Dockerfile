@@ -3,13 +3,13 @@ FROM mayfieldrobotics/ubuntu:14.04
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm"
 
-ARG CONNMAN_VER
+ARG PKG_NAME
+ARG SRC_VERSION
 ARG PKG_RELEASE
-ARG MAYFIELD_VER
 ARG ARTIFACTS_DIR
 
 ENV INSTALL_DIR="/tmp/installdir"
-ENV PKG_VERSION="${CONNMAN_VER}-${PKG_RELEASE}mayfield${MAYFIELD_VER}"
+ENV PKG_VERSION="${SRC_VERSION}-${PKG_RELEASE}"
 
 RUN apt-get update -qq \
   && apt-get install -yq \
@@ -52,14 +52,16 @@ RUN fpm \
   --chdir ${INSTALL_DIR} \
   --output-type deb \
   --architecture native \
-  --name connman \
+  --name ${PKG_NAME} \
   --version ${PKG_VERSION} \
   --description "Intel's Connection Manager daemon patched by Mayfield." \
   --depends "libc6 (>= 2.15), libdbus-1-3 (>= 1.1.1), \
              libglib2.0-0 (>= 2.28.0), libgnutls26 (>= 2.12.17-0), \
              libreadline6 (>= 6.0), libxtables10, dbus, lsb-base, \
              bluez, wpasupplicant" \
-  --conflicts "network-manager, wicd" \
+  --conflicts "connman, network-manager, wicd" \
+  --provides "connman" \
+  --replaces "connman" \
   --deb-recommends "bluez, wpasupplicant" \
   --license "GPL v2.0" \
   --vendor "Mayfield Robotics" \
