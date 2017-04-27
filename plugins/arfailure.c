@@ -24,10 +24,12 @@
 #endif
 
 #define CONNMAN_API_SUBJECT_TO_CHANGE
+#include "connman.h"
 #include <connman/plugin.h>
 #include <connman/log.h>
 #include <connman/notifier.h>
 #include <connman/service.h>
+#include <connman/setting.h>
 
 #include <glib.h>
 
