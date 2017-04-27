@@ -36,10 +36,8 @@ COPY . /root/connman/
 
 WORKDIR /root/connman
 
-RUN ./bootstrap-configure \
-  && ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
-
-RUN make \
+RUN ./bootstrap-configure-mf \
+  && make \
   && mkdir -p ${INSTALL_DIR} \
   && make install DESTDIR=${INSTALL_DIR}
 
