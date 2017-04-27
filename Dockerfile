@@ -41,7 +41,8 @@ RUN ./bootstrap-configure-mf \
   && mkdir -p ${INSTALL_DIR} \
   && make install DESTDIR=${INSTALL_DIR}
 
-# TODO: Copy files that should be installed (DBus configuration, VPN conf)
+RUN install --mode 0644 -D src/connman-upstart.conf \
+      ${INSTALL_DIR}/etc/init/connman.conf
 
 # NOTE: The dependencies below were copied from connman 1.15-0ubuntu3 (Trusty)
 #       Actual dependencies of 1.33: http://packages.ubuntu.com/xenial/connman
