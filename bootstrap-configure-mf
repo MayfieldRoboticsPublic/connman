@@ -10,7 +10,7 @@ fi
   --mandir=/usr/share/man \
   --localstatedir=/var \
   --sysconfdir=/etc \
-  --enable-arfailure=builtin \
+  --enable-arfailure \
   --enable-openconnect=builtin \
   --enable-openvpn=builtin \
   --enable-vpnc=builtin \
