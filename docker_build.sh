@@ -3,7 +3,7 @@
 set -eux
 
 # Debian package metadata
-PKG_NAME="connman"
+PKG_NAME="connman-mf"
 SRC_VERSION="1.33"
 PKG_RELEASE="0"
 
