@@ -56,7 +56,7 @@ RUN fpm \
   --description "Intel's Connection Manager daemon patched by Mayfield." \
   --depends "libc6 (>= 2.15), libdbus-1-3 (>= 1.1.1), \
              libglib2.0-0 (>= 2.28.0), libgnutls26 (>= 2.12.17-0), \
-             libreadline6 (>= 6.0), libxtables10, dbus, lsb-base, \
+             libreadline6 (>= 6.0), libxtables10, iptables, dbus, lsb-base, \
              bluez, wpasupplicant" \
   --conflicts "connman, network-manager, wicd" \
   --provides "connman" \
